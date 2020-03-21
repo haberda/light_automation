@@ -14,6 +14,8 @@ constraint | False | List of entities that when active disable the functionality
 AppDaemon constraints can be used as well, see AppDaemon API Docs https://appdaemon.readthedocs.io/en/latest/APPGUIDE.html#callback-constraints
 
 ## Example apps.yaml:
+
+```
 sunset_lights_away:
   module: light_automation
   class: light_automation
