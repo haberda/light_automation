@@ -59,20 +59,22 @@ class light_automation(hass.Hass):
     def state_change(self, entity, attribute, old, new, kwargs):
         check = self.constraint_check()
         if not check:
-            if self.on_time is not None and self.off_time is not None and self.now_is_between(self.on_time, self.off_time):
-                self.lights_on
-            elif self.on_time is not None and self.now_is_between(self.on_time, '00:00:00'):
-                self.lights_on
-            else:
-                self.lights_off
+            if self.on_time is not None and self.off_time is not None:
+                for on_time in self.on_time:
+                    for off_time in self.off_time:
+                        if self.now_is_between(on_time,off_time):
+                            self.lights_on(kwargs)
+                            return
+                self.lights_off(kwargs)
 
     def constraint_check (self):
         value = False
         if self.constraint is not None:
+            condition_states = ['on', 'Home', 'home', 'True', 'true']
             for entity in self.constraint:
-                if entity.split(',')[1] is not None:
+                if len(entity.split(',')) > 1:
                     if  entity.split(',')[1] == self.get_state(entity.split(',')[0]):
                         value = True
-                elif self.get_state(entity) == 'on' or self.get_state(entity) == True or self.get_state(entity) == 'true':
+                elif self.get_state(entity) in condition_states:
                     value = True
         return value
