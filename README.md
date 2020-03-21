@@ -109,3 +109,4 @@ lights_off_morning:
   off_time: 
     - sunrise + 00:30:00
     - sunrise + 01:00:00
+```
