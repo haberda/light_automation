@@ -6,10 +6,10 @@ Options:
 Key | Required | Description | Default | Unit
 ------------ | ------------- | ------------- | ------------- | -------------
 entity_id | True | List of lights | None | List
-on_time | False if off_time set | List of times in format 'HH:MM:SS' to start; also can be 'sunset - HH:MM:SS'. | None | Time list
-off_time | False if on_time set | List of times 'HH:MM:SS' to start; also can be 'sunrise - HH:MM:SS'. | None | Time list
+on_time | False if off_time set | List of times in format 'HH:MM:SS' to turn on; also can be 'sunset +- HH:MM:SS'. | None | Time list
+off_time | False if on_time set | List of times 'HH:MM:SS' to turn off; also can be 'sunrise +- HH:MM:SS'. | None | Time list
 data | False | Dictonary of light attributes to set. Can take any attribute that home-assistant allows in a light service call. | None | Dictionary
-constraint | False | List of entities that when active disable the functionality of this code. Can take a comma separated condition rather than disable condition key below (e.g. input_boolean.party_mode,on) | None | List
+constraint | False | List of entities that when active disable the functionality of this code. Takes a comma separated condition (e.g. input_boolean.party_mode,on) | None | List
 
 AppDaemon constraints can be used as well, see AppDaemon API Docs https://appdaemon.readthedocs.io/en/latest/APPGUIDE.html#callback-constraints
 
