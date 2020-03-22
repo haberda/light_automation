@@ -1,5 +1,6 @@
 # light_automation
 This appdaemon app fully automates your lights, with multiple on/off times, regular service data, and constraint options.
+
 Options:
 ---
 
@@ -8,8 +9,8 @@ Key | Required | Description | Default | Unit
 entity_id | True | List of lights | None | List
 on_time | False if off_time set | List of times in format 'HH:MM:SS' to turn on; also can be 'sunset +- HH:MM:SS'. | None | Time list
 off_time | False if on_time set | List of times 'HH:MM:SS' to turn off; also can be 'sunrise +- HH:MM:SS'. | None | Time list
-data | False | Dictonary of light attributes to set. Can take any attribute that home-assistant allows in a light service call. | None | Dictionary
-constraint | False | List of entities that when active disable the functionality of this code. Takes a comma separated condition (e.g. input_boolean.party_mode,on) | None | List
+data | False | Dictionary of light attributes to set. Can take any attribute that home-assistant allows in a light service call. | None | Dictionary
+constraint | False | List of entities that when active disable the functionality of this code. Takes a comma separated condition (e.g. input_boolean.party_mode,on in this case when input_boolean.party_mode is on the code is disabled). If an on and off time are defined and all constraints are turned off during that period (in other words the on_time is missed because one or more constraints are on) the lights will turn on when the last constraint is lifted. | None | List
 
 AppDaemon constraints can be used as well, see AppDaemon API Docs https://appdaemon.readthedocs.io/en/latest/APPGUIDE.html#callback-constraints
 
@@ -83,6 +84,7 @@ sunset_lights_weekend_home:
   data:
     brightness: 255
     kelvin: 5000
+    transition: 10
   on_time: sunset - 00:30:00
   off_time: '22:00:00'
   constraint:
