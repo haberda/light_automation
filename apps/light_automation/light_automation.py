@@ -11,6 +11,8 @@ class light_automation(hass.Hass):
         self.constraint = self.args.get('constraint', [])
         self.service_data = self.args.get('data', {"entity_id": None})
         self.service_data['entity_id'] = self.lights
+        self.off_service_data = self.args.get('off_data', {"entity_id": None})
+        self.off_service_data['entity_id'] = self.lights
 
         if isinstance(self.on_time, str):
             self.on_time = self.on_time.split(',')
@@ -52,9 +54,9 @@ class light_automation(hass.Hass):
         check = self.constraint_check()
         if not check:
             self.log('Lights off')
-            off_service_data = {}
-            off_service_data['entity_id'] = self.service_data['entity_id']
-            self.call_service("light/turn_off", **off_service_data)
+            # off_service_data = {}
+            # off_service_data['entity_id'] = self.service_data['entity_id']
+            self.call_service("light/turn_off", **self.off_service_data)
 
     def state_change(self, entity, attribute, old, new, kwargs):
         check = self.constraint_check()
