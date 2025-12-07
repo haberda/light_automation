@@ -1,4 +1,7 @@
 # light_automation
+
+Note: no longer maintained.
+
 This appdaemon app fully automates your lights, with multiple on/off times, regular service data, and constraint options.
 
 Options:
